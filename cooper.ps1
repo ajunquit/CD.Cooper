@@ -7,7 +7,6 @@ Import-Module IISAdministration
 $rutaAccesoFisicaApp = ""
 $sitioWebNombre=""
 $artefactoNombre=""
-$rutaArtefactoNombre=""
 $compiladoFinalNombre=""
 $poolAplicacionNombre=""
 $perfilCD= $null
@@ -18,33 +17,48 @@ function Ejecutar-Canalizacion-CD{
 	Detener-Sitio-Web
 	Write-Host "Sitio web detenido con exito."
 	
+	Start-Sleep -Seconds 1
+
 	Write-Host "Intentanto detener Pool Application"
 	Detener-IIS
 	Write-Host "Pool Application detenido con exito"
+
+	Start-Sleep -Seconds 1
 	
 	Write-Host "Intentando realizar backup"
 	Realizar-Backup
 	Write-Host "Backup realizado con exito"
+
+	Start-Sleep -Seconds 1
 	
 	Write-Host "Intentanto realizar la publicacion de la aplicacion"
 	Publicar
-	Write-Host "La publicacin se realizo con exito"
+	Write-Host "La publicacion se realizo con exito"
 	
+	Start-Sleep -Seconds 1
+
 	Write-Host "Intentanto iniciar Pool Application"
 	Iniciar-IIS
 	Write-Host "Pool Application iniciado con exito"
 	
+	Start-Sleep -Seconds 5
+
 	Write-Host "Intentanto iniciar sitio web"
 	Iniciar-Sitio-Web
 	Write-Host "Sitio web iniciado con exito"
 	
+	Start-Sleep -Seconds 2
+
+	Write-Host "Intentando reciclar Pool Application"
+	Reclicar-IIS
+	Write-Host "Pool Application reciclado con exito"	
+	
+	Start-Sleep -Seconds 2
+
 	Write-Host "Intentando reiniciar sitio web"
 	Reiniciar-Sitio-Web
 	Write-Host "Sitio web reiniciado con exito"
-	
-	Write-Host "Intentando reciclar Pool Application"
-	Reclicar-IIS
-	Write-Host "Pool Application reciclado con exito"
+
 }
 
 #13
