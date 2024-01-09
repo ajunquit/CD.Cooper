@@ -1,0 +1,4 @@
+# Ignorar todos los archivos excepto .ps1 y .cd
+*
+!*.ps1
+!*.cd
